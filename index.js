@@ -1,6 +1,6 @@
 "use strict";
 // Initialize
-document.addEventListener("DOMContentLoaded", getValues);
+// document.addEventListener("DOMContentLoaded", getValues);
 
 //Variables
 const queueList = document.querySelector("ul");
@@ -53,6 +53,7 @@ let arrayLength;
 let createList;
 let value;
 let newValue;
+let queueLength;
 
 //////////////  Data Handleing  /////////////
 
@@ -79,14 +80,11 @@ function modArray() {
 }
 
 //////////////  Visuals  /////////////
-
 function createLi() {
-  for (let i = 0; i <= arrayQueue.length; i++) {
-    createList = document.createElement("li");
-    createList.value = arrayQueue[i];
-    queueList.appendChild(createList);
-    calValue();
-  }
+  createList = document.createElement("li");
+  createList.value = arrayQueue[arrayQueue.length - 1];
+  queueList.appendChild(createList);
+  calValue();
 }
 
 function calValue() {
@@ -104,72 +102,22 @@ function translateValue() {
   value = createList.value;
   createList.style.transform = `translate(0,-${newValue}%)`;
   console.log(createList.value);
+  checkLength();
 }
 
-/* //Variables
-const queueList = document.querySelector("ul");
-const totalValue = 32;
-const arrayQueue = [
-  "32",
-  "21",
-  "10",
-  "19",
-  "26",
-  "21",
-  "26",
-  "27",
-  "6",
-  "3",
-  "7",
-  "10",
-  "9",
-  "10",
-  "14",
-  "3",
-  "28",
-  "0",
-  "11",
-  "32",
-  "25",
-  "19",
-  "18",
-  "6",
-  "4",
-  "3",
-  "7",
-  "28",
-  "4",
-  "32",
-  "12",
-  "6",
-  "8",
-  "1",
-  "21",
-  "12",
-  "5",
-  "13",
-  "6",
-  "30",
-];
+function checkLength() {
+  queueLength = queueList.getElementsByTagName("li").length;
+  if (queueLength > 40) {
+    removeLi();
+  }
+}
 
-let arrayObject;
-let arrayLength;
-let createList;
-let value;
-let newValue;
+function removeLi() {
+  queueList.removeChild(queueList.firstElementChild);
+}
 
+/* 
 //////////////  Data Handleing  /////////////
-
-// Fake Data
-function getNumberOfCustomers() {
-  //FAKE: gives a completely random number
-  return Math.floor(Math.random() * 32);
-}
-
-function getValues() {
-  arrayLength = arrayQueue.length;
-  modArray();
-}
 
 function modArray() {
   const queueSize = getNumberOfCustomers();

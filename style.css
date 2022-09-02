@@ -1,7 +1,7 @@
 ul {
   height: 15vw;
   padding: 0;
-  text-align: center;
+  /* text-align: center; */
   overflow: hidden;
 }
 li {
